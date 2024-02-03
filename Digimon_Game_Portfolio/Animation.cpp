@@ -7,7 +7,7 @@
 
 
 Animation::Animation(vector<shared_ptr<class Sprite>> data, PlayMode type)
-	:sprites_vec(data),mode(type),playtime(0.f),index(0),play_rate(9.f)
+	:sprites_vec(data), mode(type), playtime(0.f), index(0), play_rate(9.f)
 {
 
 }
@@ -31,14 +31,14 @@ Animation::Animation(Sprite_Info info, PlayMode type)
 
 void Animation::Update()
 {
-	
+
 	playtime += play_rate * Time::Delta();
 	index = floor(playtime);
 	Enemy* enemy = dynamic_cast<Enemy*>(Owner);
 	switch (mode)
 	{
 	case PlayMode::Loop:
-		if (index >= sprites_vec.size()) 
+		if (index >= sprites_vec.size())
 		{
 			index = 0;
 			playtime = 0.f;
@@ -64,8 +64,8 @@ void Animation::Update()
 		}
 		break;
 	case PlayMode::End_Stop:
-		
-		if (index >= sprites_vec.size()) 
+
+		if (index >= sprites_vec.size())
 		{
 			index = sprites_vec.size() - 1;
 
@@ -92,7 +92,7 @@ void Animation::Render()
 
 void Animation::ViewProjection(D3DXMATRIX& V, D3DXMATRIX& P)
 {
-	for (shared_ptr<class Sprite> sprite: sprites_vec)
+	for (shared_ptr<class Sprite> sprite : sprites_vec)
 	{
 		sprite->ViewProjection(V, P);
 	}
